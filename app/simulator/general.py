@@ -4,12 +4,10 @@ class General:
 
     def __init__(self,
                  id: int,
-                 is_traitor: bool,
-                 neighbours: list()):
+                 is_traitor: bool):
         
         self.id = id
         self.is_traitor = is_traitor
-        self.neighbours = neighbours
         self.msg_log = dict()
         self.decision = None
 
@@ -45,10 +43,9 @@ class SupremeGeneral(General):
     def __init__(self,
                  id: int,
                  is_traitor: bool,
-                 neighbours: list(),
                  order: int):
         
-        super().__init__(id, is_traitor, neighbours)
+        super().__init__(id, is_traitor)
         self.order = order
         self.decision = None
 

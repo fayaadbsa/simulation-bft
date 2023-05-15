@@ -3,22 +3,39 @@ import json
 
 from general import *
 
-def begin_simulation(honest_general: int,
+def begin_simulation(total_general: int,
          traitor_general: int,
          is_supreme_traitor: bool,
          order: int):
     """
-        Supreme general di-exclude dari honest_general atau traitor_general
+        
     """
-    
-    supreme_general = SupremeGeneral(0, is_supreme_traitor, list(), order)
     generals = []
+    supreme_general = SupremeGeneral(0, is_supreme_traitor, order)
 
-    for i in range(1, honest_general+1):
-        generals.append(General(i, False, list()))
+    # Init honest_generals
+    num_of_honest_general = total_general - traitor_general
+    for i in range(1, num_of_honest_general + 1):
+        generals.append(General(i, False))
+
+    # Init traitor_generals
+    if (is_supreme_traitor and traitor_general > 1):
+        for i in range(num_of_honest_general + 1, num_of_honest_general + traitor_general):
+            generals.append(General(i, True))
+    elif (not is_supreme_traitor):
+        for i in range(num_of_honest_general + 1, num_of_honest_general + traitor_general + 1):
+            generals.append(General(i , True))
+
+
+    # supreme_general = SupremeGeneral(0, is_supreme_traitor, list(), order)
+    # generals = []
     
-    for i in range(honest_general+1, traitor_general+honest_general+1):
-        generals.append(General(i, True, list()))
+
+    # for i in range(1, honest_general+1):
+    #     generals.append(General(i, False, list()))
+    
+    # for i in range(honest_general+1, traitor_general+honest_general+1):
+    #     generals.append(General(i, True, list()))
 
     
     for general in generals:
@@ -45,9 +62,9 @@ def begin_simulation(honest_general: int,
     
 
     result = {
-        "honestGeneral": honest_general,
+        "honestGeneral": num_of_honest_general,
         "traitorGeneral": traitor_general,
-        "totalGeneral": honest_general + traitor_general + 1,
+        "totalGeneral": total_general,
         "isSupremeTraitor": is_supreme_traitor,
         "order": order,
         "log": log, 
@@ -58,7 +75,13 @@ def begin_simulation(honest_general: int,
 
 
 def main():
-    begin_simulation(3,0,True,0)
+    begin_simulation(10,2,True,1)
 
 if __name__ == '__main__':
     main()
+
+# if n_traitor > 0  && is_supremetraitor == True -> supreme_general include traitors && list_traitors
+# elif n_traitor > 0 && is_supremetraitor == False -> supreme_general not in traitors $$ list_traitors
+# else -> no traitors
+
+
