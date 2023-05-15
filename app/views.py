@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from app.bft import *
 from app.simulator.simulator import main
 
 def index(request):
