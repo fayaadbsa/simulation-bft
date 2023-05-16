@@ -1,0 +1,53 @@
+
+/* .trying{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position:absolute;
+    animation-name:moving;
+    animation-duration: 4s;
+    animation-delay: 2s;
+}
+
+@keyframes moving{
+    0%{ background-color:red;left:0px;top:0px;}
+    25%{ background-color:yellow;left:200px;top:0px;}
+    50%{background-color:blue;left:200px;top:200px;}
+    75%{background-color:green;left:0px;top:200px;}
+    100%{background-color:red;left:0px;top:0px;}
+} */
+
+.nodes{
+    width: 40px;
+    height: 40px;
+    background: blue;
+    border-radius: 50%;
+    position:fixed;
+}
+
+.mail-layout:hover{
+    cursor: pointer;
+    outline: solid 3px #FC5185;
+    transition: outline 0.1s linear;
+}
+
+
+.mail-layout{
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.mail{
+    width: 20px;
+    height: 20px;
+    background: pink;
+    position:fixed;
+    transition: top 6s, left 6s;
+    opacity: 0.1;
+}
+
+.mail-layout:hover > .mail {
+    cursor: pointer;
+    opacity: 1;
+}
