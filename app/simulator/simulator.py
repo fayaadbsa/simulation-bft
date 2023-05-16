@@ -1,7 +1,7 @@
 from __future__ import annotations
 import json
 
-from general import *
+from app.simulator.general import *
 
 def begin_simulation(total_general: int,
          traitor_general: int,
@@ -71,15 +71,15 @@ def begin_simulation(total_general: int,
         "decided_action": decided_action,
     }
     
-    print(result)
-    return (result)
+    print(json.dumps(result, indent=3))
+    return result
 
 
-def main():
-    begin_simulation(10,2,True,1)
+def main(num_general, num_faulty, is_supreme_traitor, order):
+    return begin_simulation(num_general, num_faulty, is_supreme_traitor, order)
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
 
 # if n_traitor > 0  && is_supremetraitor == True -> supreme_general include traitors && list_traitors
 # elif n_traitor > 0 && is_supremetraitor == False -> supreme_general not in traitors $$ list_traitors
