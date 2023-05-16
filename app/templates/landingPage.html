@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
     <title>Landing page</title>
 </head>
 
@@ -13,16 +14,21 @@
     <div class="outer-box">
         <div class="box-form-input">
             <h3>Byzantine General Problem Simulation</h3>
-            <form action="#">
-                <label for="nodecount">Node Count</label><br>
-                <input type="number" id="nodecount" name="nodecount" value=""><br>
+            <form action="/result" method="get">
+                <label for="nodecount">Node Count (4 - 16)</label><br>
+                <input type="number" id="nodecount" name="nodecount" value="" min="4" max="16" required><br>
                 <label for="fnodecount">Faulty Node Count</label><br>
-                <input type="number" id="fnodecount" name="fnodecount" value=""><br><br>
+                <input type="number" id="fnodecount" name="fnodecount" value="" required><br><br>
                 <label class="checkbox-container">Supreme general is traitor
-                    <input type="checkbox" checked="checked">
+                    <input type="checkbox" name="isSupremeTraitor" value="true">
                     <span class="checkmark"></span>
                 </label>
-
+                <span>Order:</span><br>
+                <input type="radio" id="attack" name="order" value="attack" required style="width: 20px; height: 20px;">
+                <label for="attack">Attack</label><br>
+                <input type="radio" id="retreat" name="order" value="retreat" style="width: 20px; height: 20px;">
+                <label for="retreat">Retreat</label><br>
+                <br>
                 <input type="submit" value="Submit" id="submit-button">
             </form>
         </div>
@@ -32,6 +38,16 @@
             magni?
         </div>
     </div>
+    <script>
+      var nodeCount = document.getElementById('nodecount');
+      nodeCount.addEventListener('input', function(e) {
+        var faultyNodeCount = document.getElementById('fnodecount');
+        var out = document.getElementById('out');
+        var val = Math.floor((parseInt(nodeCount.value, 10) - 1) / 3 );
+        faultyNodeCount.setAttribute('max', val);
+        out.value = faultyNodeCount.getAttribute('max');
+      }, false);
+    </script>
 </body>
 
 </html>
