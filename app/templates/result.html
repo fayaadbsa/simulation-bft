@@ -7,10 +7,10 @@
 </head>
 <body>
   <h1>Simulation - Byzantine Fault Tolerance</h1>
-  <p> honestGeneral: {{ honestGeneral }} </p>
-  <p> traitorGeneral: {{ traitorGeneral }} </p>
-  <p> totalGeneral: {{ totalGeneral }} </p>
-  <p> isSupremeTraitor: {{ isSupremeTraitor }} </p>
+  <p> honestGeneral: {{ honest_general }} </p>
+  <p> traitorGeneral: {{ traitor_general }} </p>
+  <p> totalGeneral: {{ total_general }} </p>
+  <p> isSupremeTraitor: {{ is_supreme_traitor }} </p>
   <p> order: {{ order }} </p> <br/>
   {% for general, messages in log.items %}
     <p> {{ general }} </p>
@@ -19,7 +19,7 @@
     {% endfor %}
     <br/>
   {% endfor %}
-  <p> decidedAction: {{ decidedAction }} </p>
+  <p> decidedAction: {{ decided_action }} </p>
   <a href="/">Back</a>
 </body>
 </html>
