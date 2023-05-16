@@ -70,8 +70,9 @@ def begin_simulation(total_general: int,
         "log": log, 
         "decidedAction": decided_action,
     }
-
+    
     print(json.dumps(result, indent=3))
+    return (json.dumps(result, indent=3))
 
 
 def main():
