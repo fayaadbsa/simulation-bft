@@ -71,7 +71,7 @@ def begin_simulation(total_general: int,
         "decided_action": decided_action,
     }
     
-    print(json.dumps(result, indent=3))
+    # print(json.dumps(result, indent=3))
     return result
 
 
