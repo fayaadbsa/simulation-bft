@@ -21,4 +21,4 @@ def result(request):
     order = 1 if order == "attack" else 0
 
     result = main(num_general, num_faulty, is_supreme_traitor, order)
-    return render(request, "result.html", result)
+    return render(request, "simulationPage.html", result)
