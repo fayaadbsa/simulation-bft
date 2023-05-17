@@ -9,49 +9,74 @@ const decided_action = JSON.parse(document.getElementById('decided_action').text
 
 const nodeCount = totalGeneral;
 
-if (nodeCount <= 4) {
-    console.log(nodeCount)
-    const nodesPositionX = [0, 200, 200, 0];
-    const nodesPositionY = [0, 0, 200, 200];
-    console.log(nodesPositionX)
-    console.log(nodesPositionY)
-    generateNode(nodeCount, nodesPositionX, nodesPositionY, 500, 200)
+mainAnimation()
 
-} else if (nodeCount <= 8) {
-    console.log(nodeCount)
-    const nodesPositionX = [0, 100, 200, 250, 200, 100, 0, -50];
-    const nodesPositionY = [0, -50, 0, 100, 200, 250, 200, 100];
-    console.log(nodesPositionX)
-    console.log(nodesPositionY)
-    generateNode(nodeCount, nodesPositionX, nodesPositionY, 500, 200)
+async function mainAnimation() {
+    if (nodeCount <= 4) {
+        console.log(nodeCount)
+        const nodesPositionX = [0, 200, 200, 0];
+        const nodesPositionY = [0, 0, 200, 200];
+        console.log(nodesPositionX)
+        console.log(nodesPositionY)
+        generateNode(nodeCount, nodesPositionX, nodesPositionY, 500, 200)
+        sendMail(nodeCount, nodesPositionX, nodesPositionY, 500, 200)
+        await delay(6000);
 
-} else if (nodeCount <= 12) {
-    console.log(nodeCount)
-    const nodesPositionX = [0, 200, 200, 0];
-    const nodesPositionY = [0, 0, 200, 200];
-    console.log(nodesPositionX)
-    console.log(nodesPositionY)
-} else if (nodeCount <= 16) {
-    console.log(nodeCount)
-    const nodesPositionX = [0, 200, 200, 0];
-    const nodesPositionY = [0, 0, 200, 200];
-    console.log(nodesPositionX)
-    console.log(nodesPositionY)
+    } else if (nodeCount <= 8) {
+        console.log(nodeCount)
+        const nodesPositionX = [0, 100, 200, 250, 200, 100, 0, -50];
+        const nodesPositionY = [0, -50, 0, 100, 200, 250, 200, 100];
+        console.log(nodesPositionX)
+        console.log(nodesPositionY)
+        generateNode(nodeCount, nodesPositionX, nodesPositionY, 500, 200)
+        sendMail(nodeCount, nodesPositionX, nodesPositionY, 500, 200)
+        await delay(12000);
+        hideMail()
+
+    } else if (nodeCount <= 12) {
+        console.log(nodeCount)
+        const nodesPositionX = [0, 200, 200, 0];
+        const nodesPositionY = [0, 0, 200, 200];
+        console.log(nodesPositionX)
+        console.log(nodesPositionY)
+    } else if (nodeCount <= 16) {
+        console.log(nodeCount)
+        const nodesPositionX = [0, 200, 200, 0];
+        const nodesPositionY = [0, 0, 200, 200];
+        console.log(nodesPositionX)
+        console.log(nodesPositionY)
+    }
 }
 
+function delay(milliseconds){
+    return new Promise(resolve => {
+        setTimeout(resolve, milliseconds);
+    });
+}
 
 function generateNode(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0, startPointY = 0) {
 
     let text = ""
+    let traitorCount = traitorGeneral;
 
     for (let i = 0; i < nodeCount; i++) {
-        const nodemlay = "<div class='mail-layout mlay-"+i+"'>"
-        text += nodemlay
-        const nodeIdDiv = "<div class='nodes' id='node-" + i + "'></div>"
-        text += nodeIdDiv
+        if(i !== 0 && traitorCount > 0){
+            console.log("MASUK IF")
+            const nodeIdDiv = "<div class='nodes tnode' id='node-" + i + "'></div>"
+            text += nodeIdDiv
+            traitorCount -= 1;
+        }
+        else{
+            const nodeIdDiv = "<div class='nodes' id='node-" + i + "'></div>"
+            text += nodeIdDiv
+        }
+    }
 
+    for (let i = 0; i < nodeCount; i++) {
+        const nodemlay = "<div class='mail-layout mlay-" + i + "'>"
+        text += nodemlay
         for (let j = 0; j < nodeCount; j++) {
-            if (i !== j){
+            if (i !== j) {
                 const mailDiv = "<div class='mail node-" + i + " mail-" + j + "'></div>"
                 text += mailDiv
             }
@@ -68,43 +93,59 @@ function generateNode(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0
         console.log(nodeID)
 
         xnodepos = nodesPositionX[i] + startPointX
-        ynodepos = nodesPositionY[i] + startPointY 
+        ynodepos = nodesPositionY[i] + startPointY
 
         document.getElementById(nodeID).style.left = (xnodepos + "px");
         document.getElementById(nodeID).style.top = (ynodepos + "px");
-        
-        const maillay = document.getElementsByClassName(("mlay-"+i));
+
+        const maillay = document.getElementsByClassName(("mlay-" + i));
         console.log(maillay)
         Object.values(maillay).forEach(lay => {
-            lay.style.left = (xnodepos+ "px");
-            lay.style.top = (ynodepos+ "px");
+            lay.style.left = (xnodepos + "px");
+            lay.style.top = (ynodepos + "px");
         });
-        
+
         const mails = document.getElementsByClassName(nodeID);
         // console.log(mails)
         Object.values(mails).forEach(mail => {
-            mail.style.left = ((xnodepos + 10)+ "px");
-            mail.style.top = ((ynodepos + 10)+ "px");
+            mail.style.left = ((xnodepos + 10) + "px");
+            mail.style.top = ((ynodepos + 10) + "px");
         });
-        
-    }
 
-    setTimeout(function() {
-        for(let i = 0; i<nodeCount; i++){
-            const mailClass = "mail-"+i;
-            xnodepos = nodesPositionX[i] + startPointX
-            ynodepos = nodesPositionY[i] + startPointY
-            
-            if(document.getElementsByClassName(mailClass)){
-                const mails = document.getElementsByClassName(mailClass);
-                console.log(mails)
-                
-                Object.values(mails).forEach(mail => {
+    }
+}
+
+function sendMail(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0, startPointY = 0) {
+    for (let i = 0; i < nodeCount; i++) {
+        const mailClass = "node-" + i;
+        if (document.getElementsByClassName(mailClass)) {
+            const mails = document.getElementsByClassName(mailClass);
+            console.log(mails)
+            let counter = 0;
+            let delayTime = 5500
+            Object.values(mails).forEach(mail => {
+                if (i == 0) { delayTime = 0 }
+                setTimeout(function () {
+                    if (i === counter) { counter += 1 }
+                    xnodepos = nodesPositionX[counter] + startPointX
+                    ynodepos = nodesPositionY[counter] + startPointY
+                    console.log(mail)
                     mail.style.left = ((xnodepos + 10) + "px");
                     mail.style.top = ((ynodepos + 10) + "px");
-                })
-            }
-        }
-    }, 1000);
+                    console.log(i)
+                    console.log(counter)
+                    counter += 1;
+                }, delayTime)
 
+            })
+        }
+    }
+
+}
+
+function hideMail() {
+    const allmail = document.getElementsByClassName("mail");
+    Object.values(allmail).forEach(mail => {
+        mail.style.display = "none";
+    })
 }
