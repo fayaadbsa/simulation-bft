@@ -13,7 +13,7 @@
 <body>
     <div class="outer-box">
         <div class="box-form-input">
-            <h3>Byzantine General Problem Simulation</h3>
+            <h3>Form Simulation</h3>
             <form action="/result" method="get">
                 <label for="nodecount">Node Count (4 - 16)</label><br>
                 <input type="number" id="nodecount" name="nodecount" value="" min="4" max="16" required><br>
@@ -33,9 +33,23 @@
             </form>
         </div>
         <div class="box-information">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam voluptates ut neque id corporis? Doloremque
-            consectetur, eaque alias cum recusandae odio provident. Laudantium ipsum laborum, rem officiis ipsa vitae
-            magni?
+          <h1 style="margin-top: 0;">Byzantine General Problem Simulation</h1>
+          <p>
+            <h3>Syarat & Ketentuan</h3>
+            <ol>
+              <li>Supreme general adalah general pertama yang mengirim pesan</li>
+              <li>Setiap general termasuk supreme general dapat menjadi traitor</li>
+              <li>Setiap pesan dijamin terkirim</li>
+              <li>General mengetahui siapa yang mengirim pesan ke dirinya.</li>
+              <li>Pesan yang tidak dikirim dapat diketahui</li>
+              <li>Value pesan yang kirim hanya berisi Attack atau Retreat</li>
+              <li>Supreme general yang berkhianat mengirim pesan attack kepada general ganjil dan pesan retreat kepada general genap.</li>
+              <li>General yang berkhianat selalu mengirim pesan yang berlawanan kepada general lain dari yang diberikan supreme general.</li>
+              <li>General/Supreme General yang berkhianat tidak menyerang maupun mundur</li>
+              <li>Apabila jumlah pesan yang diterima oleh general untuk Attack dan Retreat sama, maka konsensus yang akan diambil adalah Retreat.</li>
+              <li>Kota berhasil dikuasai apabila terdapat minimal ⅔ dari total general yang sepakat untuk menyerang kota (untuk menjadikan simulasi hidup)</li>
+            </ol>
+          </p>
         </div>
     </div>
     <script>

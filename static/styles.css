@@ -12,26 +12,31 @@
 
   body {
       /* background-color: powderblue; */
+      background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Piero_della_Francesca_021.jpg/1200px-Piero_della_Francesca_021.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 100vh;
       color: black;
-      padding: 2rem 3rem;
       font-family: Verdana, Geneva, Tahoma, sans-serif
   }
 
   .outer-box {
       display: flex;
+      margin: 50px;
       /* background-color: red; */
-      justify-content: space-around;
+      /* justify-content: space-around; */
       height: 500px;
   }
 
   .box-form-input {
-      width: 450px;
-      background-color: #d8d8d8;
+      min-width: 250px;
+      background-color: #FFD19A;
       padding: 1rem;
       border-radius: 15px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
 
   .box-form-input h3 {
@@ -57,17 +62,21 @@
 
   #submit-button {
       width: 100%;
-      margin-top: 0;
+      margin-top: "auto";
       height: 2rem;
+      font-weight: 700;
+      font-size: 16px;
       cursor: pointer;
   }
 
   .box-information {
-      background-color: yellowgreen;
+      background-color: #fffbab;
       border-radius: 15px;
-      padding: 2.75rem 2rem;
+      padding: 2rem;
       text-align: justify;
       margin-left: 2rem;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      width: 100%;
   }
 
 
