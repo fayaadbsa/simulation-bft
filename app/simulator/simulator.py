@@ -53,7 +53,18 @@ def begin_simulation(total_general: int,
     for general in generals:
         general.decide_action()
 
-    log = { f"general{general.id}": general.msg_log for general in generals }
+    send_log = dict()
+    send_log["supreme_general"] = supreme_general.send_log
+    for general in generals:
+        send_log[f"general_{general.id}"] = general.send_log
+
+
+    receive_log = { f"general{general.id}": general.msg_log for general in generals }
+    for general in generals:
+        decided_value = general.decide_action()
+        receive_log[f"general_{general.id}"]["attack_count"] = decided_value["attack_count"]
+        receive_log[f"general_{general.id}"]["retreat_count"] = decided_value["retreat_count"]
+
 
     decided_action = {}
     decided_action["supreme_general"] = supreme_general.decision
@@ -67,11 +78,12 @@ def begin_simulation(total_general: int,
         "total_general": total_general,
         "is_supreme_traitor": is_supreme_traitor,
         "order": order,
-        "log": log, 
+        "send_log": send_log,
+        "receive_log": receive_log, 
         "decided_action": decided_action,
     }
     
-    # print(json.dumps(result, indent=3))
+    print(json.dumps(result, indent=3))
     return result
 
 
