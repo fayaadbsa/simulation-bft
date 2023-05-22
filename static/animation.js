@@ -2,7 +2,7 @@ const data = document.currentScript.dataset;
 const honestGeneral = parseInt(data.honestGeneral, 10);
 const traitorGeneral = parseInt(data.traitorGeneral, 10);
 const totalGeneral = parseInt(data.totalGeneral, 10);
-const isSupremeTraitor = parseInt(data.isSupremeTraitor, 10);
+const isSupremeTraitor = data.isSupremeTraitor === "True";
 const order = parseInt(data.order, 10);
 const log = JSON.parse(document.getElementById('log').textContent);
 const decided_action = JSON.parse(document.getElementById('decided_action').textContent);
