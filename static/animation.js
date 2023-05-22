@@ -13,7 +13,7 @@ mainAnimation()
 
 async function mainAnimation() {
     console.log("TESTSETESTESTES")
-    console.log(decided_action)
+    console.log(log)
     console.log("TESTSETESTESTES")
 
     if (nodeCount <= 4) {
@@ -68,7 +68,7 @@ function generateNode(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0
 
     // sementara
     console.log(isSupremeTraitor)
-    console.log(log)
+    // console.log(log)
 
     if(isSupremeTraitor){
         for (let i = 0; i < nodeCount; i++) {
@@ -97,7 +97,7 @@ function generateNode(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0
             else{
                 const generalNum = ("general_"+i)
                 const generalData = log[generalNum]
-                console.log(generalData)
+                // console.log(generalData)
                 const dataBoard = "<div class='data-board' id=db-" + i +"'>"+
                 "<p>Attack: "+ generalData["attack_count"] + "</p>"+
                 "<p>Retreat: "+ generalData["retreat_count"] + "</p>"+
@@ -107,19 +107,31 @@ function generateNode(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0
             }
             
 
-            if(i !== 0 && traitorCount > 0){
-                let mOrderClass = (order === 1) ? "mretreat" : "mattack";
-                for (let j = 0; j < nodeCount; j++) {
-                    if (i !== j) {
-                        const mailDiv = "<div class='mail "+mOrderClass+" node-" + i + " mail-" + j + "'></div>"
-                        text += mailDiv
+            if(traitorCount > 0){
+                console.log("traitor: "+traitorCount)
+                if(i === 0){
+                    for (let j = 0; j < nodeCount; j++) {
+                        let mOrderClass = (j%2 === 0) ? "mretreat" : "mattack";
+                        if (i !== j) {
+                            const mailDiv = "<div class='mail "+mOrderClass+" node-" + i + " mail-" + j + "'></div>"
+                            text += mailDiv
+                        }
+                    }
+                }
+                else{
+                    let mOrderClass = (i%2 === 0) ? "mattack" : "mretreat";
+                    for (let j = 0; j < nodeCount; j++) {
+                        if (i !== j) {
+                            const mailDiv = "<div class='mail "+mOrderClass+" node-" + i + " mail-" + j + "'></div>"
+                            text += mailDiv
+                        }
                     }
                 }
                 traitorCount -= 1;
             }
     
             else{
-                let mOrderClass = (order === 1) ? "mattack" : "mretreat";
+                let mOrderClass = (i%2 === 0) ? "mretreat" : "mattack";
                 for (let j = 0; j < nodeCount; j++) {
                     if (i !== j) {
                         const mailDiv = "<div class='mail "+mOrderClass+" node-" + i + " mail-" + j + "'></div>"
@@ -199,7 +211,7 @@ function generateNode(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0
     // adjust position
     for (let i = 0; i < nodeCount; i++) {
         const nodeID = "node-" + i
-        console.log(nodeID)
+        // console.log(nodeID)
 
         xnodepos = nodesPositionX[i] + startPointX
         ynodepos = nodesPositionY[i] + startPointY
@@ -208,7 +220,7 @@ function generateNode(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0
         document.getElementById(nodeID).style.top = (ynodepos + "px");
 
         const maillay = document.getElementsByClassName(("mlay-" + i));
-        console.log(maillay)
+        // console.log(maillay)
         Object.values(maillay).forEach(lay => {
             lay.style.left = (xnodepos + "px");
             lay.style.top = (ynodepos + "px");
@@ -266,21 +278,17 @@ function hideMail() {
 
 function attackRetreatPosition(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0, startPointY = 0) {
     for (let i = 0; i < nodeCount; i++) {
-        console.log(decided_action[("general_"+(i+1))])
+        const nodeID = "node-" + i
+        const decide_act = i === 0 ?decided_action["supreme_general"] :decided_action[("general_"+i)]
 
-          const nodeID = "node-" + i
-        console.log(nodeID)
-
-        const xnodepos = decided_action[i] === 1? (400 + startPointX): (-100 + startPointX)
+        const xnodepos = decide_act === 1? (400 + startPointX): (-100 + startPointX)
         const ynodepos = nodesPositionY[i] + (i*5) + startPointY
 
-        console.log(ynodepos)
 
         document.getElementById(nodeID).style.left = (xnodepos + "px");
         document.getElementById(nodeID).style.top = (ynodepos + "px");
 
         const maillay = document.getElementsByClassName(("mlay-" + i));
-        console.log(maillay)
         Object.values(maillay).forEach(lay => {
             lay.style.left = (xnodepos + "px");
             lay.style.top = (ynodepos + "px");
