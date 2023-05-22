@@ -78,8 +78,7 @@ def begin_simulation(total_general: int,
         "total_general": total_general,
         "is_supreme_traitor": is_supreme_traitor,
         "order": order,
-        "send_log": send_log,
-        "receive_log": receive_log, 
+        "log": receive_log, 
         "decided_action": decided_action,
     }
     
