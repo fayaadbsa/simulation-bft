@@ -13,29 +13,18 @@ def begin_simulation(total_general: int,
     generals = []
     supreme_general = SupremeGeneral(0, is_supreme_traitor, order)
 
-    # Init honest_generals
-    num_of_honest_general = total_general - traitor_general
-    for i in range(1, num_of_honest_general + 1):
-        generals.append(General(i, False))
-
-    # Init traitor_generals
+    # Init traitor generals
     if (is_supreme_traitor and traitor_general > 1):
-        for i in range(num_of_honest_general + 1, num_of_honest_general + traitor_general):
+        for i in range(1, traitor_general):
             generals.append(General(i, True))
     elif (not is_supreme_traitor):
-        for i in range(num_of_honest_general + 1, num_of_honest_general + traitor_general + 1):
+        for i in range(1, traitor_general + 1):
             generals.append(General(i , True))
 
-
-    # supreme_general = SupremeGeneral(0, is_supreme_traitor, list(), order)
-    # generals = []
-    
-
-    # for i in range(1, honest_general+1):
-    #     generals.append(General(i, False, list()))
-    
-    # for i in range(honest_general+1, traitor_general+honest_general+1):
-    #     generals.append(General(i, True, list()))
+    # Init honest_generals
+    num_of_honest_general = total_general - traitor_general
+    for i in range(traitor_general + 1, traitor_general + num_of_honest_general):
+        generals.append(General(i, False))
 
     
     for general in generals:
