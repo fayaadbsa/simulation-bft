@@ -15,8 +15,10 @@ def begin_simulation(total_general: int,
 
     # Init traitor generals
     if (is_supreme_traitor and traitor_general > 1):
-        for i in range(1, traitor_general):
+        for i in range(1, traitor_general + 1):
             generals.append(General(i, True))
+    elif (is_supreme_traitor and traitor_general == 1):
+        pass
     elif (not is_supreme_traitor):
         for i in range(1, traitor_general + 1):
             generals.append(General(i , True))
