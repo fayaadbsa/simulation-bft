@@ -23,7 +23,7 @@
     background: rgb(3, 161, 223);
     border-radius: 50%;
     position:fixed;
-    /* opacity: 0; */
+    transition: top 2s, left 2s;
 }
 
 .tnode{
@@ -46,6 +46,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    transition: top 2s, left 2s;
 }
 .mail{
     width: 20px;
@@ -76,14 +77,14 @@
 .data-board{
     padding: 0.1rem 0.5rem;
     border-radius: 5px;
-    height: 80px;
-    width: 70px;
+    height: 120px;
+    width: 120px;
     background-color: gray;
     position: relative;
     top:-70px;
     left:20px;
     opacity: 0;
-    /* display: none; */
+    display: none;
 }
 
 .mail-layout:hover > .data-board{
