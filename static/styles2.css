@@ -23,10 +23,11 @@
     background: rgb(3, 161, 223);
     border-radius: 50%;
     position:fixed;
+    /* opacity: 0; */
 }
 
 .tnode{
-    background-color: rgb(233, 75, 75);
+    background-color: red;
 }
 
 #node-0{
@@ -52,11 +53,40 @@
     background: pink;
     position:fixed;
     transition: top 6s, left 6s;
-    opacity: 0.1;
+    opacity: 0;
+}
+
+.first-mail{
+    opacity: 0.6;
+}
+
+.mattack{
+    background: green;
+}
+.mretreat{
+    background: red;
 }
 
 .mail-layout:hover > .mail {
     cursor: pointer;
     opacity: 1;
     outline: solid 2px black;
+}
+
+.data-board{
+    padding: 0.1rem 0.5rem;
+    border-radius: 5px;
+    height: 80px;
+    width: 70px;
+    background-color: gray;
+    position: relative;
+    top:-70px;
+    left:20px;
+    opacity: 0;
+    /* display: none; */
+}
+
+.mail-layout:hover > .data-board{
+    cursor: pointer;
+    opacity: 1;
 }

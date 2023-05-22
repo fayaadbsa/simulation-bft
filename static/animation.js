@@ -12,6 +12,10 @@ const nodeCount = totalGeneral;
 mainAnimation()
 
 async function mainAnimation() {
+    console.log("TESTSETESTESTES")
+    console.log(log)
+    // console.log(decided_action)
+
     if (nodeCount <= 4) {
         console.log(nodeCount)
         const nodesPositionX = [0, 200, 200, 0];
@@ -20,7 +24,8 @@ async function mainAnimation() {
         console.log(nodesPositionY)
         generateNode(nodeCount, nodesPositionX, nodesPositionY, 500, 200)
         sendMail(nodeCount, nodesPositionX, nodesPositionY, 500, 200)
-        await delay(6000);
+        await delay(12000);
+        hideMail()
 
     } else if (nodeCount <= 8) {
         console.log(nodeCount)
@@ -61,7 +66,6 @@ function generateNode(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0
 
     for (let i = 0; i < nodeCount; i++) {
         if(i !== 0 && traitorCount > 0){
-            console.log("MASUK IF")
             const nodeIdDiv = "<div class='nodes tnode' id='node-" + i + "'></div>"
             text += nodeIdDiv
             traitorCount -= 1;
@@ -72,13 +76,33 @@ function generateNode(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0
         }
     }
 
+    traitorCount = traitorGeneral;
     for (let i = 0; i < nodeCount; i++) {
         const nodemlay = "<div class='mail-layout mlay-" + i + "'>"
         text += nodemlay
-        for (let j = 0; j < nodeCount; j++) {
-            if (i !== j) {
-                const mailDiv = "<div class='mail node-" + i + " mail-" + j + "'></div>"
-                text += mailDiv
+        const dataBoard = "<div class='data-board' id=db-" + i +"'>"+
+        "<p>total</p>"+
+        "</div>"
+        text += dataBoard
+
+        if(i !== 0 && traitorCount > 0){
+            let mOrderClass = (order === 1) ? "mretreat" : "mattack";
+            for (let j = 0; j < nodeCount; j++) {
+                if (i !== j) {
+                    const mailDiv = "<div class='mail "+mOrderClass+" node-" + i + " mail-" + j + "'></div>"
+                    text += mailDiv
+                }
+            }
+            traitorCount -= 1;
+        }
+
+        else{
+            let mOrderClass = (order === 1) ? "mattack" : "mretreat";
+            for (let j = 0; j < nodeCount; j++) {
+                if (i !== j) {
+                    const mailDiv = "<div class='mail "+mOrderClass+" node-" + i + " mail-" + j + "'></div>"
+                    text += mailDiv
+                }
             }
         }
 
@@ -122,10 +146,11 @@ function sendMail(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0, st
             const mails = document.getElementsByClassName(mailClass);
             console.log(mails)
             let counter = 0;
-            let delayTime = 5500
+            let delayTime = 5500;
             Object.values(mails).forEach(mail => {
                 if (i == 0) { delayTime = 0 }
                 setTimeout(function () {
+                    mail.style.opacity = "0.6";
                     if (i === counter) { counter += 1 }
                     xnodepos = nodesPositionX[counter] + startPointX
                     ynodepos = nodesPositionY[counter] + startPointY
@@ -140,12 +165,16 @@ function sendMail(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0, st
             })
         }
     }
-
 }
 
 function hideMail() {
     const allmail = document.getElementsByClassName("mail");
     Object.values(allmail).forEach(mail => {
         mail.style.display = "none";
+    })
+
+    const allDb = document.getElementsByClassName("data-board");
+    Object.values(allDb).forEach(db => {
+        db.style.display = "block";
     })
 }
