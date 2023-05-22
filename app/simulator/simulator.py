@@ -46,7 +46,7 @@ def begin_simulation(total_general: int,
             if (general_sender.id == general_receiver.id):
                 continue
             else:
-                order = general_sender.msg_log["supreme_general"]
+                order = general_sender.receive_log["supreme_general"]
                 general_sender.send_msg(general_receiver, order)
     
     supreme_general.decide_action()
@@ -59,7 +59,7 @@ def begin_simulation(total_general: int,
         send_log[f"general_{general.id}"] = general.send_log
 
 
-    receive_log = { f"general{general.id}": general.msg_log for general in generals }
+    receive_log = { f"general_{general.id}": general.receive_log for general in generals }
     for general in generals:
         decided_value = general.decide_action()
         receive_log[f"general_{general.id}"]["attack_count"] = decided_value["attack_count"]
@@ -90,8 +90,8 @@ def begin_simulation(total_general: int,
 def main(num_general, num_faulty, is_supreme_traitor, order):
     return begin_simulation(num_general, num_faulty, is_supreme_traitor, order)
 
-# if __name__ == '__main__':
-#     main()
+if __name__ == '__main__':
+    main()
 
 # if n_traitor > 0  && is_supremetraitor == True -> supreme_general include traitors && list_traitors
 # elif n_traitor > 0 && is_supremetraitor == False -> supreme_general not in traitors $$ list_traitors
