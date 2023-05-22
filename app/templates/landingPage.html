@@ -57,7 +57,7 @@
       nodeCount.addEventListener('input', function(e) {
         var faultyNodeCount = document.getElementById('fnodecount');
         var out = document.getElementById('out');
-        var val = Math.floor((parseInt(nodeCount.value, 10) - 1) / 3 );
+        var val = Math.floor((parseInt(nodeCount.value)));
         faultyNodeCount.setAttribute('max', val);
         out.value = faultyNodeCount.getAttribute('max');
       }, false);
