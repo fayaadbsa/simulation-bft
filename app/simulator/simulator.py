@@ -84,11 +84,11 @@ def begin_simulation(total_general: int,
     }
     
     print(json.dumps(result, indent=3))
-    # return result
+    return result
 
 
-def main():
-    begin_simulation(4, 1, False, 1)
+def main(num_general, num_faulty, is_supreme_traitor, order):
+    return begin_simulation(num_general, num_faulty, is_supreme_traitor, order)
 
 if __name__ == '__main__':
     main()
