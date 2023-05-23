@@ -17,6 +17,22 @@
     100%{background-color:red;left:0px;top:0px;}
 } */
 
+body{
+    background: beige;
+}
+
+#castle-img{
+    position: fixed;
+    left:950px;
+    top:125px;
+}
+
+.fa-user, .fa-chess-king{
+    width: 30px;
+    height: 30px;
+
+}
+
 .nodes{
     width: 40px;
     height: 40px;
@@ -24,14 +40,14 @@
     border-radius: 50%;
     position:fixed;
     transition: top 2s, left 2s;
+    border:1px solid black;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .tnode{
-    background-color: red;
-}
-
-#node-0{
-    background: orange !important; 
+    background-color: orange;
 }
 
 .mail-layout:hover{
