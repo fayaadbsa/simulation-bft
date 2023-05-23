@@ -5,13 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{% static 'fontawesome/js/all.min.js' %}"></script>
+    <link href="{% static 'fontawesome/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{% static 'styles2.css' %}">
     <title>Simulation Page</title>
 </head>
 <body>
-    
+    <div id="button-box"></div>
     <!-- <div class="trying"></div> -->
     <div id="nodes-box"></div>
+    <img id="castle-img" src="{% static 'castle.png' %}" alt="castle">
 
 </body>
 <script src="{% static 'animation.js' %}"
