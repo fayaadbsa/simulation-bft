@@ -11,18 +11,18 @@
   }
 
   body {
-      /* background-color: powderblue; */
-      background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Piero_della_Francesca_021.jpg/1200px-Piero_della_Francesca_021.jpg");
+      background-color: beige;
+      /* background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Piero_della_Francesca_021.jpg/1200px-Piero_della_Francesca_021.jpg"); */
       background-size: cover;
       background-repeat: no-repeat;
-      height: 100vh;
+      /* height: 100vh; */
       color: black;
       font-family: Verdana, Geneva, Tahoma, sans-serif
   }
 
   .outer-box {
       display: flex;
-      margin: 50px;
+      margin: 25px;
       /* background-color: red; */
       /* justify-content: space-around; */
       height: 500px;
@@ -70,13 +70,13 @@
   }
 
   .box-information {
-      background-color: #fffbab;
+      /* background-color: #fffbab; */
       border-radius: 15px;
-      padding: 2rem;
+      /* padding: 0 2rem; */
       text-align: justify;
       margin-left: 2rem;
-      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-      width: 100%;
+      /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+      /* width: 100%; */
   }
 
 

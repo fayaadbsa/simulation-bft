@@ -53,7 +53,7 @@ async function buttonPhase(){
         phase += 1;
         attackRetreatPosition(nodeCount, nodesPositionX, nodesPositionY, 500, 200)
         document.getElementById("phase-button").disabled = true; 
-        const buttonText = "<a href='/'><input type='button' value='New Simulation'/></a>";
+        const buttonText = "<a href='/'><button type='button'>New Simulation</button></a>";
         document.getElementById("button-box").innerHTML += buttonText;
     }
 }

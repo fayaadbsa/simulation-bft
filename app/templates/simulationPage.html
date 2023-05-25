@@ -7,14 +7,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="{% static 'fontawesome/js/all.min.js' %}"></script>
     <link href="{% static 'fontawesome/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'global.css' %}">
     <link rel="stylesheet" href="{% static 'styles2.css' %}">
     <title>Simulation Page</title>
 </head>
 <body>
+  <div class="outer-box">
+    <h1>Byzantine General Problem Simulation</h1>
+    <div class="legend">
+      <h2>Legend</h2>
+      <div class="legend-row">
+        <i style="width: 40px;" class='fa-regular fa-chess-king'></i><h3>Supreme General</h3>
+      </div>
+      <div class="legend-row">
+        <i style="width: 40px;" class='fa-regular fa-user'></i><h3>General</h3>
+      </div>
+      <div class="legend-row">
+        <div style="position: relative;" class='nodes'></div><h3>Innocent</h3>
+      </div>
+      <div class="legend-row">
+        <div style="position: relative;" class='nodes tnode'></div><h3>Faulty</h3>
+      </div>
+      
+    </div>
     <div id="button-box"></div>
-    <!-- <div class="trying"></div> -->
-    <div id="nodes-box"></div>
-    <img id="castle-img" src="{% static 'castle.png' %}" alt="castle">
+  </div>
+  <!-- <div class="trying"></div> -->
+  <div id="nodes-box"></div>
+  <img id="castle-img" src="{% static 'castle.png' %}" alt="castle">
 
 </body>
 <script src="{% static 'animation.js' %}"

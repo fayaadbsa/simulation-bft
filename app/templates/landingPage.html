@@ -6,21 +6,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'global.css' %}">
     <link rel="stylesheet" href="{% static 'styles.css' %}">
     <title>Landing page</title>
 </head>
 
 <body>
+    <h1 style="padding: 25px 0 0 25px;">Byzantine General Problem Simulation</h1>
     <div class="outer-box">
         <div class="box-form-input">
             <h3>Form Simulation</h3>
             <form action="/result" method="get">
-                <label for="nodecount">Node Count (4 - 16)</label><br>
-                <input type="number" id="nodecount" name="nodecount" value="" min="4" max="16" required><br>
+                <label for="nodecount">Node Count (4 - 8)</label><br>
+                <input type="number" id="nodecount" name="nodecount" value="" min="4" max="8" required><br>
                 <label for="fnodecount">Faulty Node Count</label><br>
-                <input type="number" id="fnodecount" name="fnodecount" value="" required><br><br>
+                <input type="number" id="fnodecount" name="fnodecount" value="" min="0" required><br><br>
                 <label class="checkbox-container">Supreme general is traitor
-                    <input type="checkbox" name="issupremetraitor" value="true">
+                    <input id="issupremetraitor" type="checkbox" name="issupremetraitor" value="true">
                     <span class="checkmark"></span>
                 </label>
                 <span>Order:</span><br>
@@ -29,13 +31,12 @@
                 <input type="radio" id="retreat" name="order" value="retreat" style="width: 20px; height: 20px;">
                 <label for="retreat">Retreat</label><br>
                 <br>
-                <input type="submit" value="Submit" id="submit-button">
+                <button style="width: 100%;" type="submit">Submit</button>
             </form>
         </div>
         <div class="box-information">
-          <h1 style="margin-top: 0;">Byzantine General Problem Simulation</h1>
           <p>
-            <h3>Syarat & Ketentuan</h3>
+            <h3 style="margin: 0;">Syarat & Ketentuan</h3>
             <ol>
               <li>Supreme general adalah general pertama yang mengirim pesan</li>
               <li>Setiap general termasuk supreme general dapat menjadi traitor</li>
@@ -56,10 +57,15 @@
       var nodeCount = document.getElementById('nodecount');
       nodeCount.addEventListener('input', function(e) {
         var faultyNodeCount = document.getElementById('fnodecount');
-        var out = document.getElementById('out');
-        var val = Math.floor((parseInt(nodeCount.value)));
+        var val = parseInt(nodeCount.value);
         faultyNodeCount.setAttribute('max', val);
-        out.value = faultyNodeCount.getAttribute('max');
+      }, false);
+
+      var issupremetraitor = document.getElementById('issupremetraitor');
+      issupremetraitor.addEventListener('input', function(e) {
+        checked = issupremetraitor.checked
+        var faultyNodeCount = document.getElementById('fnodecount');
+        faultyNodeCount.setAttribute('min', checked ? 1 : 0);
       }, false);
     </script>
 </body>
