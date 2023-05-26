@@ -13,24 +13,32 @@ let phase = 0;
 
 
 
-console.log("TESTSETESTESTES")
-console.log(log)
-console.log("TESTSETESTESTES")
+// console.log("TESTSETESTESTES")
+// console.log(log)
+// console.log("TESTSETESTESTES")
 
 const nodesPositionX = 
     nodeCount <= 4 ? [0, 200, 200, 0] :
     nodeCount <= 8 ? [0, 100, 200, 250, 200, 100, 0, -50] :
-    nodeCount <= 12 ? [0, 200, 200, 0] :
-    [0, 200, 200, 0]
+    nodeCount <= 12 ?[0, 25, 75, 150, 225, 275, 300, 275, 225, 150, 75, 25] :
+    [0, 25, 75, 150, 225, 275, 300, 275, 225, 150, 75, 25] 
+
 
 const nodesPositionY = 
     nodeCount <= 4 ? [0, 0, 200, 200] :
     nodeCount <= 8 ? [0, -50, 0, 100, 200, 250, 200, 100] :
-    nodeCount <= 12 ? [0, 0, 200, 200] :
-    [0, 0, 200, 200]
+    nodeCount <= 12 ?[0, 75, 125, 150, 125, 75, 0, -75, -125, -150, -125, -75]:
+    [0, 75, 125, 150, 125, 75, 0, -75, -125, -150, -125, -75]
 
-generateNode(nodeCount, nodesPositionX, nodesPositionY, 500, 200)
+const xcenter = 
+    nodeCount <= 8 ? 500 :500
 
+
+const ycenter = 
+    nodeCount <= 8 ? 200 : 300 
+
+
+generateNode(nodeCount, nodesPositionX, nodesPositionY, xcenter, ycenter)
 
 function delay(milliseconds) {
     return new Promise(resolve => {
@@ -39,10 +47,10 @@ function delay(milliseconds) {
 }
 
 async function buttonPhase(){
-    console.log("button work")
+    // console.log("button work")
     if(phase === 1){
         document.getElementById("phase-button").disabled = true; 
-        sendMail(nodeCount, nodesPositionX, nodesPositionY, 500, 200)
+        sendMail(nodeCount, nodesPositionX, nodesPositionY, xcenter, ycenter)
         await delay(12000)
         hideMail()
         phase += 1;
@@ -51,10 +59,8 @@ async function buttonPhase(){
     }
     else if(phase === 2){
         phase += 1;
-        attackRetreatPosition(nodeCount, nodesPositionX, nodesPositionY, 500, 200)
+        attackRetreatPosition(nodeCount, nodesPositionX, nodesPositionY, xcenter, ycenter)
         document.getElementById("phase-button").disabled = true; 
-        const buttonText = "<a href='/'><button type='button'>New Simulation</button></a>";
-        document.getElementById("button-box").innerHTML += buttonText;
     }
 }
 
@@ -83,7 +89,7 @@ function generateNode(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0
             if (i === 0) {
                 const dataBoard = "<div class='data-board' id=db-" + i + "'>" +
                     "<p>Supreme General</p>" +
-                    "<p>Action: retreat</p>" +
+                    "<p class='db-action-r-word'>Action: retreat</p>" +
                     "</div>"
                 text += dataBoard
             }
@@ -92,21 +98,21 @@ function generateNode(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0
                 const generalData = log[generalNum]
                 // console.log(generalData)
                 const dataBoard = "<div class='data-board' id=db-" + i + "'>" +
-                    "<p>Attack: " + generalData["attack_count"] + "</p>" +
-                    "<p>Retreat: " + generalData["retreat_count"] + "</p>" +
-                    "<p>Action: " + (decided_action[generalNum] ? "attack" : "retreat") + "</p>" +
+                    "<p class='db-attack-word'>Attack: " + generalData["attack_count"] + "</p>" +
+                    "<p class='db-reatreat-word'>Retreat: " + generalData["retreat_count"] + "</p>" +
+                    "<p class='"+ (decided_action[generalNum] ?"db-action-a-word":"db-action-r-word") +"'>Action: " + (decided_action[generalNum] ? "attack" : "retreat") + "</p>" +
                     "</div>"
                 text += dataBoard
             }
 
 
             if (traitorCount > 0) {
-                console.log("traitor: " + traitorCount)
+                // console.log("traitor: " + traitorCount)
                 if (i === 0) {
                     for (let j = 0; j < nodeCount; j++) {
                         let mOrderClass = (j % 2 === 0) ? "mretreat" : "mattack";
                         if (i !== j) {
-                            const mailDiv = "<div class='mail " + mOrderClass + " node-" + i + " mail-" + j + "'></div>"
+                            const mailDiv = "<div class='mail " + mOrderClass + " node-" + i + " mail-" + j + "'><i class='fa-regular fa-envelope'></i></div>"
                             text += mailDiv
                         }
                     }
@@ -115,7 +121,7 @@ function generateNode(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0
                     let mOrderClass = (i % 2 === 0) ? "mattack" : "mretreat";
                     for (let j = 0; j < nodeCount; j++) {
                         if (i !== j) {
-                            const mailDiv = "<div class='mail " + mOrderClass + " node-" + i + " mail-" + j + "'></div>"
+                            const mailDiv = "<div class='mail " + mOrderClass + " node-" + i + " mail-" + j + "'><i class='fa-regular fa-envelope'></i></div>"
                             text += mailDiv
                         }
                     }
@@ -127,7 +133,7 @@ function generateNode(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0
                 let mOrderClass = (i % 2 === 0) ? "mretreat" : "mattack";
                 for (let j = 0; j < nodeCount; j++) {
                     if (i !== j) {
-                        const mailDiv = "<div class='mail " + mOrderClass + " node-" + i + " mail-" + j + "'></div>"
+                        const mailDiv = "<div class='mail " + mOrderClass + " node-" + i + " mail-" + j + "'><i class='fa-regular fa-envelope'></i></div>"
                         text += mailDiv
                     }
                 }
@@ -157,7 +163,7 @@ function generateNode(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0
             if (i === 0) {
                 const dataBoard = "<div class='data-board' id=db-" + i + "'>" +
                     "<p>Supreme General</p>" +
-                    "<p>Action: " + (order ? "attack" : "retreat") + "</p>" +
+                    "<p class='"+ (order ?"db-action-a-word":"db-action-r-word") +"'>Action: " + (order ? "attack" : "retreat") + "</p>" +
                     "</div>"
                 text += dataBoard
             }
@@ -165,9 +171,9 @@ function generateNode(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0
                 const generalNum = ("general_" + i)
                 const generalData = log[generalNum]
                 const dataBoard = "<div class='data-board' id=db-" + i + "'>" +
-                    "<p>Attack: " + generalData["attack_count"] + "</p>" +
-                    "<p>Retreat: " + generalData["retreat_count"] + "</p>" +
-                    "<p>Action: " + (decided_action[generalNum] ? "attack" : "retreat") + "</p>" +
+                    "<p class='db-attack-word'>Attack: " + generalData["attack_count"] + "</p>" +
+                    "<p class='db-retreat-word'>Retreat: " + generalData["retreat_count"] + "</p>" +
+                    "<p class='"+ (decided_action[generalNum] ?"db-action-a-word":"db-action-r-word") +"'>Action: " + (decided_action[generalNum] ? "attack" : "retreat") + "</p>" +
                     "</div>"
                 text += dataBoard
             }
@@ -177,7 +183,7 @@ function generateNode(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0
                 let mOrderClass = (order === 1) ? "mretreat" : "mattack";
                 for (let j = 0; j < nodeCount; j++) {
                     if (i !== j) {
-                        const mailDiv = "<div class='mail " + mOrderClass + " node-" + i + " mail-" + j + "'></div>"
+                        const mailDiv = "<div class='mail " + mOrderClass + " node-" + i + " mail-" + j + "'><i class='fa-regular fa-envelope'></i></div>"
                         text += mailDiv
                     }
                 }
@@ -188,7 +194,7 @@ function generateNode(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0
                 let mOrderClass = (order === 1) ? "mattack" : "mretreat";
                 for (let j = 0; j < nodeCount; j++) {
                     if (i !== j) {
-                        const mailDiv = "<div class='mail " + mOrderClass + " node-" + i + " mail-" + j + "'></div>"
+                        const mailDiv = "<div class='mail " + mOrderClass + " node-" + i + " mail-" + j + "'><i class='fa-regular fa-envelope'></i></div>"
                         text += mailDiv
                     }
                 }
@@ -228,7 +234,7 @@ function generateNode(nodeCount, nodesPositionX, nodesPositionY, startPointX = 0
             mail.style.top = ((ynodepos + 10) + "px");
         });
     }
-    const buttonText = "<button type='button' id='phase-button' onclick='buttonPhase();'>Send Mail</button>";
+    const buttonText = "<button type='button' id='phase-button' onclick='buttonPhase();'>Send Mail</button><a href='/'><button type='button'>New Simulation</button></a>";
     document.getElementById("button-box").innerHTML += buttonText;
     phase += 1;
 }
@@ -278,8 +284,8 @@ function attackRetreatPosition(nodeCount, nodesPositionX, nodesPositionY, startP
         const nodeID = "node-" + i
         const decide_act = i === 0 ? decided_action["supreme_general"] : decided_action[("general_" + i)]
 
-        console.log(nodeID + " " + decide_act)
-        console.log(decided_action)
+        // console.log(nodeID + " " + decide_act)
+        // console.log(decided_action)
 
         const xnodepos = decide_act === 1 ? (400 + startPointX) : (-100 + startPointX)
         const ynodepos = nodesPositionY[i] + (i * 10) + startPointY
