@@ -20,17 +20,25 @@ let phase = 0;
 const nodesPositionX = 
     nodeCount <= 4 ? [0, 200, 200, 0] :
     nodeCount <= 8 ? [0, 100, 200, 250, 200, 100, 0, -50] :
-    nodeCount <= 12 ? [0, 200, 200, 0] :
-    [0, 200, 200, 0]
+    nodeCount <= 12 ?[0, 25, 75, 150, 225, 275, 300, 275, 225, 150, 75, 25] :
+    [0, 25, 75, 150, 225, 275, 300, 275, 225, 150, 75, 25] 
+
 
 const nodesPositionY = 
     nodeCount <= 4 ? [0, 0, 200, 200] :
     nodeCount <= 8 ? [0, -50, 0, 100, 200, 250, 200, 100] :
-    nodeCount <= 12 ? [0, 0, 200, 200] :
-    [0, 0, 200, 200]
+    nodeCount <= 12 ?[0, 75, 125, 150, 125, 75, 0, -75, -125, -150, -125, -75]:
+    [0, 75, 125, 150, 125, 75, 0, -75, -125, -150, -125, -75]
 
-generateNode(nodeCount, nodesPositionX, nodesPositionY, 500, 200)
+const xcenter = 
+    nodeCount <= 8 ? 500 :500
 
+
+const ycenter = 
+    nodeCount <= 8 ? 200 : 300 
+
+
+generateNode(nodeCount, nodesPositionX, nodesPositionY, xcenter, ycenter)
 
 function delay(milliseconds) {
     return new Promise(resolve => {
@@ -42,7 +50,7 @@ async function buttonPhase(){
     // console.log("button work")
     if(phase === 1){
         document.getElementById("phase-button").disabled = true; 
-        sendMail(nodeCount, nodesPositionX, nodesPositionY, 500, 200)
+        sendMail(nodeCount, nodesPositionX, nodesPositionY, xcenter, ycenter)
         await delay(12000)
         hideMail()
         phase += 1;
@@ -51,7 +59,7 @@ async function buttonPhase(){
     }
     else if(phase === 2){
         phase += 1;
-        attackRetreatPosition(nodeCount, nodesPositionX, nodesPositionY, 500, 200)
+        attackRetreatPosition(nodeCount, nodesPositionX, nodesPositionY, xcenter, ycenter)
         document.getElementById("phase-button").disabled = true; 
     }
 }
